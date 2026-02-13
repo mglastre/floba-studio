@@ -57,7 +57,7 @@ export default function Header() {
                             : "border-white text-white hover:bg-white hover:text-black"
                             }`}
                     >
-                        <span>Presupuesto</span>
+                        <span>Planes</span>
                         <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" strokeWidth={1} />
                     </Link>
                 </div>
@@ -93,7 +93,7 @@ export default function Header() {
                             onClick={() => setMobileMenuOpen(false)}
                             className="group flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-widest border border-black text-black hover:bg-black hover:text-white transition-all duration-300"
                         >
-                            <span>Presupuesto</span>
+                            <span>Planes</span>
                             <MoveRight className="w-4 h-4 transition-transform group-hover:translate-x-1" strokeWidth={1} />
                         </Link>
                     </motion.div>
