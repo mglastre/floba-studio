@@ -5,34 +5,40 @@ import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slide
 
 const projects = [
     {
-        title: "Nordic Light Loft",
-        image: "https://images.unsplash.com/photo-1600210492493-0946911123ea?w=800&h=600&fit=crop",
-        tags: ["Scandinavian", "Functional Elegance"]
+        title: "Renovación de Comedor",
+        before: "/portfolio/antes-1.jpg",
+        after: "/portfolio/despues-1.jpg",
+        tags: ["Interiorismo", "Renderizado Fotorrealista"]
     },
     {
-        title: "Redwood Horizon",
-        image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=800&h=600&fit=crop",
-        tags: ["Timber Architecture", "Nature Immersion"]
+        title: "Transformación de Cocina",
+        before: "/portfolio/antes-2.jpg",
+        after: "/portfolio/despues-2.jpg",
+        tags: ["Arquitectura", "Diseño Moderno"]
     },
     {
-        title: "Atelier Noir",
-        image: "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=800&h=600&fit=crop",
-        tags: ["Monochrome", "Industrial Chic"]
+        title: "Rediseño de Espacios",
+        before: "/portfolio/antes-3.jpg",
+        after: "/portfolio/despues-3.jpg",
+        tags: ["Estética", "Ambiente Cálido"]
     },
     {
-        title: "Noir Cultura Studio",
-        image: "https://images.unsplash.com/photo-1600607687644-c7171b42498f?w=800&h=600&fit=crop",
-        tags: ["Artistic", "Urban Minimalism"]
+        title: "Vivienda Contemporánea",
+        before: "/portfolio/antes-4.jpg",
+        after: "/portfolio/despues-4.jpg",
+        tags: ["Minimalismo", "Luz Natural"]
     },
     {
-        title: "Maison Éclat Studio",
-        image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&h=600&fit=crop",
-        tags: ["Statement Lighting", "Brand Experience"]
+        title: "Refugio Urbano",
+        before: "/portfolio/antes-5.jpeg",
+        after: "/portfolio/despues-5.jpg",
+        tags: ["Confort", "Texturas"]
     },
     {
-        title: "Concrete Poetry",
-        image: "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?w=800&h=600&fit=crop",
-        tags: ["Brutalist", "Raw Texture"]
+        title: "Skyline Suite",
+        before: "/portfolio/antes-6.jpg",
+        after: "/portfolio/despues-6.jpg",
+        tags: ["Lujo", "Vistas Panorámicas"]
     }
 ];
 
@@ -57,15 +63,21 @@ export default function Portfolio() {
                             <div className="relative h-64 md:h-72 overflow-hidden bg-gray-100">
                                 <ReactCompareSlider
                                     itemOne={
-                                        <div
-                                            className="w-full h-full bg-cover bg-center grayscale"
-                                            style={{ backgroundImage: `url(${project.image})` }}
+                                        <ReactCompareSliderImage
+                                            src={project.before}
+                                            alt="Antes"
+                                            style={{ objectFit: 'cover' }}
+                                            onLoad={() => console.log(`Loaded before: ${project.before}`)}
+                                            onError={() => console.error(`Error loading before: ${project.before}`)}
                                         />
                                     }
                                     itemTwo={
-                                        <div
-                                            className="w-full h-full bg-cover bg-center"
-                                            style={{ backgroundImage: `url(${project.image})` }}
+                                        <ReactCompareSliderImage
+                                            src={project.after}
+                                            alt="Después"
+                                            style={{ objectFit: 'cover' }}
+                                            onLoad={() => console.log(`Loaded after: ${project.after}`)}
+                                            onError={() => console.error(`Error loading after: ${project.after}`)}
                                         />
                                     }
                                     className="w-full h-full"
