@@ -67,8 +67,6 @@ export default function Portfolio() {
                                             src={project.before}
                                             alt="Antes"
                                             style={{ objectFit: 'cover' }}
-                                            onLoad={() => console.log(`Loaded before: ${project.before}`)}
-                                            onError={() => console.error(`Error loading before: ${project.before}`)}
                                         />
                                     }
                                     itemTwo={
@@ -76,8 +74,6 @@ export default function Portfolio() {
                                             src={project.after}
                                             alt="Después"
                                             style={{ objectFit: 'cover' }}
-                                            onLoad={() => console.log(`Loaded after: ${project.after}`)}
-                                            onError={() => console.error(`Error loading after: ${project.after}`)}
                                         />
                                     }
                                     className="w-full h-full"
