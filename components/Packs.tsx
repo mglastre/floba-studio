@@ -87,10 +87,10 @@ export default function Packs() {
     };
 
     return (
-        <section id="pricing" className="py-24 bg-packbg px-4 md:px-12 border-y border-subtle relative">
+        <section id="pricing" className="py-12 bg-packbg px-4 md:px-12 border-y border-subtle relative">
             <div className="max-w-7xl mx-auto">
-                <div className="text-center mb-16">
-                    <h2 className="text-3xl md:text-5xl font-serif tracking-tight mb-4">Planes Integrales</h2>
+                <div className="text-center mb-8">
+                    <h2 className="text-3xl md:text-5xl font-serif tracking-tight mb-2">Planes Integrales</h2>
                     <p className="font-sans text-sm text-gray-500 uppercase tracking-widest">Transparencia y Calidad desde el primer pixel</p>
                 </div>
 
@@ -106,12 +106,12 @@ export default function Packs() {
                                 {packs.map((pack, i) => (
                                     <th
                                         key={pack.name}
-                                        className={`p-6 text-center transition-colors duration-300 ${hoveredIndex === i ? "bg-white" : ""
+                                        className={`p-3 text-center transition-colors duration-300 ${hoveredIndex === i ? "bg-white" : ""
                                             }`}
                                         onMouseEnter={() => setHoveredIndex(i)}
                                     >
-                                        <span className="font-serif text-xl block mb-2">{pack.name}</span>
-                                        <div className="block font-sans text-xs text-gray-400 font-normal uppercase tracking-widest h-8">{pack.subtitle}</div>
+                                        <span className="font-serif text-xl block mb-1">{pack.name}</span>
+                                        <div className="block font-sans text-[10px] text-gray-400 font-normal uppercase tracking-widest leading-tight">{pack.subtitle}</div>
                                     </th>
                                 ))}
                             </tr>
@@ -119,13 +119,13 @@ export default function Packs() {
                         <tbody>
                             {features.map((feature, idx) => (
                                 <tr key={feature.key} className="border-b border-subtle/50 group">
-                                    <td className="p-4 py-6 font-sans text-sm text-gray-600 font-medium">
+                                    <td className="p-2 py-3 font-sans text-sm text-gray-600 font-medium">
                                         {feature.name}
                                     </td>
                                     {packs.map((pack, i) => (
                                         <td
                                             key={i}
-                                            className={`p-4 py-6 text-center font-sans text-sm text-gray-500 transition-colors duration-300 ${hoveredIndex === i ? "bg-white" : ""
+                                            className={`p-2 py-3 text-center font-sans text-sm text-gray-500 transition-colors duration-300 ${hoveredIndex === i ? "bg-white" : ""
                                                 } ${feature.isPrice ? "text-xl text-black font-medium" : ""}`}
                                             onMouseEnter={() => setHoveredIndex(i)}
                                         >
@@ -144,7 +144,7 @@ export default function Packs() {
                                 {packs.map((pack, i) => (
                                     <td
                                         key={i}
-                                        className={`p-6 text-center transition-colors duration-300 ${hoveredIndex === i ? "bg-white" : ""
+                                        className={`p-3 text-center transition-colors duration-300 ${hoveredIndex === i ? "bg-white" : ""
                                             }`}
                                         onMouseEnter={() => setHoveredIndex(i)}
                                     >
