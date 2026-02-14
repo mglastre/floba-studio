@@ -1,7 +1,9 @@
-"use strict";
 "use client";
 
+import { useState, useEffect } from "react";
 import { ReactCompareSlider, ReactCompareSliderImage } from "react-compare-slider";
+import { motion, AnimatePresence } from "framer-motion";
+import { X, Maximize2 } from "lucide-react";
 
 const projects = [
     {
@@ -43,13 +45,27 @@ const projects = [
 ];
 
 export default function Portfolio() {
+    const [selectedProject, setSelectedProject] = useState<typeof projects[0] | null>(null);
+
+    // Lock scroll when modal is open
+    useEffect(() => {
+        if (selectedProject) {
+            document.body.style.overflow = "hidden";
+        } else {
+            document.body.style.overflow = "unset";
+        }
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, [selectedProject]);
+
     return (
         <section id="portfolio" className="py-24 md:py-32 bg-white px-6 md:px-12">
             <div className="max-w-7xl mx-auto">
                 <div className="text-center mb-16">
                     <h2 className="text-3xl md:text-5xl font-serif tracking-tight mb-4">Transformación Visual</h2>
                     <p className="font-sans text-sm text-gray-500 uppercase tracking-widest">
-                        Desliza para ver la magia
+                        Desliza y haz clic para ampliar
                     </p>
                 </div>
 
@@ -59,8 +75,11 @@ export default function Portfolio() {
                             key={idx}
                             className="group bg-white rounded overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500"
                         >
-                            {/* Before/After Slider */}
-                            <div className="relative h-64 md:h-72 overflow-hidden bg-gray-100">
+                            {/* Before/After Slider Container */}
+                            <div
+                                className="relative h-64 md:h-72 overflow-hidden bg-gray-100 cursor-zoom-in"
+                                onClick={() => setSelectedProject(project)}
+                            >
                                 <ReactCompareSlider
                                     itemOne={
                                         <ReactCompareSliderImage
@@ -86,11 +105,19 @@ export default function Portfolio() {
                                     }
                                 />
 
-                                {/* Labels */}
-                                <div className="absolute top-4 left-4 text-white text-xs font-sans uppercase tracking-widest pointer-events-none mix-blend-difference opacity-80">
+                                {/* Hover Overlay */}
+                                <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none flex items-center justify-center">
+                                    <div className="bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full flex items-center gap-2 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 shadow-lg">
+                                        <Maximize2 size={14} className="text-accent" />
+                                        <span className="text-[10px] font-sans font-bold uppercase tracking-widest text-black">Ampliar</span>
+                                    </div>
+                                </div>
+
+                                {/* Static Labels */}
+                                <div className="absolute top-4 left-4 text-white text-[10px] font-sans uppercase tracking-widest pointer-events-none mix-blend-difference opacity-80">
                                     Antes
                                 </div>
-                                <div className="absolute top-4 right-4 text-white text-xs font-sans uppercase tracking-widest pointer-events-none mix-blend-difference opacity-80">
+                                <div className="absolute top-4 right-4 text-white text-[10px] font-sans uppercase tracking-widest pointer-events-none mix-blend-difference opacity-80">
                                     Después
                                 </div>
                             </div>
@@ -116,6 +143,81 @@ export default function Portfolio() {
                     ))}
                 </div>
             </div>
+
+            {/* Lightbox / Modal */}
+            <AnimatePresence>
+                {selectedProject && (
+                    <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8">
+                        {/* Backdrop */}
+                        <motion.div
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            onClick={() => setSelectedProject(null)}
+                            className="absolute inset-0 bg-black/95 backdrop-blur-md"
+                        />
+
+                        {/* Close Button */}
+                        <motion.button
+                            initial={{ opacity: 0, scale: 0.5 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            exit={{ opacity: 0, scale: 0.5 }}
+                            onClick={() => setSelectedProject(null)}
+                            className="absolute top-6 right-6 z-[110] p-3 bg-white/10 hover:bg-white/20 rounded-full transition-colors text-white border border-white/20"
+                        >
+                            <X size={24} />
+                        </motion.button>
+
+                        {/* Modal Content */}
+                        <motion.div
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            className="relative w-full max-w-6xl aspect-[4/3] md:aspect-video bg-gray-900 rounded overflow-hidden shadow-2xl z-[105]"
+                            onClick={(e) => e.stopPropagation()}
+                        >
+                            <ReactCompareSlider
+                                itemOne={
+                                    <ReactCompareSliderImage
+                                        src={selectedProject.before}
+                                        alt="Antes"
+                                        style={{ objectFit: 'cover' }}
+                                    />
+                                }
+                                itemTwo={
+                                    <ReactCompareSliderImage
+                                        src={selectedProject.after}
+                                        alt="Después"
+                                        style={{ objectFit: 'cover' }}
+                                    />
+                                }
+                                className="w-full h-full"
+                                handle={
+                                    <div className="w-1 h-full bg-accent relative shadow-[0_0_20px_rgba(0,0,0,0.5)]">
+                                        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-12 h-12 rounded-full border-4 border-accent bg-white flex items-center justify-center shadow-2xl">
+                                            <div className="w-3 h-3 bg-accent rounded-full animate-pulse" />
+                                        </div>
+                                    </div>
+                                }
+                            />
+
+                            {/* Info Overlay */}
+                            <div className="absolute bottom-0 inset-x-0 p-8 pt-20 bg-gradient-to-t from-black/80 to-transparent pointer-events-none">
+                                <h3 className="text-white font-serif text-2xl md:text-4xl tracking-tight mb-2">
+                                    {selectedProject.title}
+                                </h3>
+                                <div className="flex gap-2">
+                                    {selectedProject.tags.map((tag, i) => (
+                                        <span key={i} className="text-white/60 text-xs font-sans uppercase tracking-widest">
+                                            {tag}
+                                        </span>
+                                    ))}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
         </section>
     );
 }
