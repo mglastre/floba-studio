@@ -21,39 +21,47 @@ export default function BookingModal({ isOpen, onClose, selectedPack }: BookingM
         imageLink: "",
     });
 
+    const [loading, setLoading] = useState(false);
+    const [status, setStatus] = useState<{ type: 'success' | 'error' | null, message: string }>({ type: null, message: '' });
+
     // Reset form when modal opens
     useEffect(() => {
         if (isOpen) {
             setFormData({ name: "", company: "", email: "", phone: "", details: "", imageLink: "" });
+            setStatus({ type: null, message: '' });
         }
     }, [isOpen]);
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
+        setLoading(true);
+        setStatus({ type: null, message: '' });
 
-        // WhatsApp Message Construction
-        const imageLinkText = formData.imageLink ? formData.imageLink : "(No proporcionado)";
-        const message = encodeURIComponent(
-            `¡Hola! Quiero contratar el *${selectedPack}*\\n\\n` +
-            `*Mis Datos:*\\n` +
-            `👤 Nombre: ${formData.name}\\n` +
-            `🏢 Empresa: ${formData.company}\\n` +
-            `📧 Email: ${formData.email}\\n` +
-            `📱 Teléfono: ${formData.phone}\\n` +
-            `📝 Detalles: ${formData.details}\\n` +
-            `🔗 Imágenes: ${imageLinkText}`
-        );
+        try {
+            const response = await fetch('/api/contact', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ...formData, selectedPack }),
+            });
 
-        // Log for debugging
-        console.log("📤 Enviando formulario:", { selectedPack, ...formData });
+            const data = await response.json();
 
-        // Open WhatsApp (opens WhatsApp web/app with pre-filled message)
-        window.open(`https://wa.me/?text=${message}`, "_blank");
-
-        // Close modal after brief delay to ensure WhatsApp opens
-        setTimeout(() => {
-            onClose();
-        }, 300);
+            if (response.ok) {
+                setStatus({ type: 'success', message: '¡Solicitud enviada con éxito! Revisa tu correo.' });
+                setTimeout(() => {
+                    onClose();
+                }, 3000);
+            } else {
+                throw new Error(data.message || 'Error al enviar la solicitud.');
+            }
+        } catch (error) {
+            console.error("Error submitting form:", error);
+            setStatus({ type: 'error', message: 'Hubo un error. Por favor, intenta nuevamente.' });
+        } finally {
+            setLoading(false);
+        }
     };
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -215,11 +223,18 @@ export default function BookingModal({ isOpen, onClose, selectedPack }: BookingM
 
                                     <button
                                         type="submit"
-                                        className="w-full bg-black text-white py-4 mt-6 uppercase tracking-[0.2em] text-xs font-medium hover:bg-accent transition-colors flex items-center justify-center gap-2 group rounded"
+                                        disabled={loading}
+                                        className="w-full bg-black text-white py-4 mt-6 uppercase tracking-[0.2em] text-xs font-medium hover:bg-accent transition-colors flex items-center justify-center gap-2 group rounded disabled:opacity-50 disabled:cursor-not-allowed"
                                     >
-                                        <span>Enviar Solicitud</span>
-                                        <Send size={14} className="group-hover:translate-x-1 transition-transform" />
+                                        <span>{loading ? "Enviando..." : "Enviar Solicitud"}</span>
+                                        {!loading && <Send size={14} className="group-hover:translate-x-1 transition-transform" />}
                                     </button>
+
+                                    {status.message && (
+                                        <div className={`text-xs text-center p-2 rounded ${status.type === 'success' ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'}`}>
+                                            {status.message}
+                                        </div>
+                                    )}
 
                                     <p className="text-[10px] text-gray-400 text-center leading-tight pt-2">
                                         No se aceptan imágenes adjuntas por este medio. Por favor, proporcione un enlace de descarga (Drive, Dropbox, etc.).
