@@ -72,7 +72,7 @@ export default function FAQ() {
     const [openTermIndex, setOpenTermIndex] = useState<number | null>(null);
 
     return (
-        <section id="faq" className="py-24 bg-white px-6">
+        <section id="faq" className="py-24 bg-white px-6 scroll-mt-24">
             <div className="max-w-3xl mx-auto">
                 <h2 className="text-3xl font-serif mb-12 text-center tracking-tight">Preguntas Frecuentes</h2>
 
@@ -110,7 +110,7 @@ export default function FAQ() {
                     ))}
                 </div>
 
-                <h2 id="terms" className="text-2xl font-serif mb-12 text-center tracking-tight text-gray-400">Términos y Condiciones de Servicio</h2>
+                <h2 id="terms" className="text-2xl font-serif mb-12 text-center tracking-tight text-gray-400 scroll-mt-32">Términos y Condiciones de Servicio</h2>
 
                 <div className="space-y-4">
                     {terms.map((term, index) => (
