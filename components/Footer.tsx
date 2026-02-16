@@ -15,8 +15,8 @@ export default function Footer() {
 
                 <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8 text-xs font-sans text-gray-400 uppercase tracking-widest">
                     <div className="flex flex-col md:flex-row gap-4 md:gap-8">
-                        <Link href="https://www.instagram.com/flobastudio/" target="_blank" className="hover:text-white transition-colors">Instagram</Link>
-                        <Link href="mailto:hola@flobastudio.com" className="hover:text-white transition-colors">Email</Link>
+                        <a href="https://www.instagram.com/flobastudio/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Instagram</a>
+                        <a href="mailto:hola@flobastudio.com" className="hover:text-white transition-colors">Email</a>
                         <Link href="#faq" className="hover:text-white transition-colors">Preguntas Frecuentes</Link>
                         <Link href="#terms" className="hover:text-white transition-colors">Términos y Condiciones</Link>
                     </div>
