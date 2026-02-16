@@ -16,11 +16,10 @@ export default function Hero() {
                     loop
                     muted
                     playsInline
+                    preload="auto"
                     className="h-full w-full object-cover"
                 >
-                    {/* Intento cargar con doble extensión por si acaso, y luego la normal */}
                     <source src="/videos/portada.mp4.MP4" type="video/mp4" />
-                    <source src="/videos/portada.mp4" type="video/mp4" />
                 </video>
             </div>
 
