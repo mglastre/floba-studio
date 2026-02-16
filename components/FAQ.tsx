@@ -110,7 +110,7 @@ export default function FAQ() {
                     ))}
                 </div>
 
-                <h2 className="text-2xl font-serif mb-12 text-center tracking-tight text-gray-400">Términos y Condiciones de Servicio</h2>
+                <h2 id="terms" className="text-2xl font-serif mb-12 text-center tracking-tight text-gray-400">Términos y Condiciones de Servicio</h2>
 
                 <div className="space-y-4">
                     {terms.map((term, index) => (

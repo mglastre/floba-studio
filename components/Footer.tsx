@@ -18,11 +18,12 @@ export default function Footer() {
                         <Link href="https://www.instagram.com/flobastudio/" target="_blank" className="hover:text-white transition-colors">Instagram</Link>
                         <Link href="mailto:hola@flobastudio.com" className="hover:text-white transition-colors">Email</Link>
                         <Link href="#faq" className="hover:text-white transition-colors">Preguntas Frecuentes</Link>
-                        <Link href="#faq" className="hover:text-white transition-colors">Términos y Condiciones</Link>
+                        <Link href="#terms" className="hover:text-white transition-colors">Términos y Condiciones</Link>
                     </div>
 
-                    <div>
-                        © 2026 Flobastudio. All rights reserved.
+                    <div className="flex flex-col items-center md:items-end gap-1">
+                        <div>Buenos Aires — Miami</div>
+                        <div>© 2026 Flobastudio. All rights reserved.</div>
                     </div>
                 </div>
             </div>
