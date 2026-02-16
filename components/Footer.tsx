@@ -14,13 +14,15 @@ export default function Footer() {
                 <div className="w-full h-px bg-white/10 my-12" />
 
                 <div className="flex flex-col md:flex-row justify-between items-center w-full gap-8 text-xs font-sans text-gray-400 uppercase tracking-widest">
-                    <div className="flex gap-4">
-                        <Link href="https://www.instagram.com/fobastudio3d/" target="_blank" className="hover:text-white transition-colors">Instagram</Link>
-                        <Link href="#" className="hover:text-white transition-colors">LinkedIn</Link>
+                    <div className="flex flex-col md:flex-row gap-4 md:gap-8">
+                        <Link href="https://www.instagram.com/flobastudio/" target="_blank" className="hover:text-white transition-colors">Instagram</Link>
+                        <Link href="mailto:hola@flobastudio.com" className="hover:text-white transition-colors">Email</Link>
+                        <Link href="#faq" className="hover:text-white transition-colors">Preguntas Frecuentes</Link>
+                        <Link href="#faq" className="hover:text-white transition-colors">Términos y Condiciones</Link>
                     </div>
 
                     <div>
-                        © 2026 CABA, Buenos Aires - Miami, Florida.
+                        © 2026 Flobastudio. All rights reserved.
                     </div>
                 </div>
             </div>
