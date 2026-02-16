@@ -50,8 +50,7 @@ export default function Header() {
 
                 <div className="hidden md:flex">
                     <Link
-                        href="https://wa.me/"
-                        target="_blank"
+                        href="#pricing"
                         className={`group flex items-center gap-2 px-5 py-2 text-xs uppercase tracking-widest border transition-all duration-300 ${scrolled
                             ? "border-black text-black hover:bg-black hover:text-white"
                             : "border-white text-white hover:bg-white hover:text-black"
@@ -88,8 +87,7 @@ export default function Header() {
                         </nav>
 
                         <Link
-                            href="https://wa.me/"
-                            target="_blank"
+                            href="#pricing"
                             onClick={() => setMobileMenuOpen(false)}
                             className="group flex items-center gap-2 px-8 py-3 text-xs uppercase tracking-widest border border-black text-black hover:bg-black hover:text-white transition-all duration-300"
                         >
