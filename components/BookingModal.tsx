@@ -2,7 +2,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Send, Link as LinkIcon, Phone, Mail, User } from "lucide-react";
+import { X, Send, Link as LinkIcon, Phone, Mail, User, Building2, FileText } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface BookingModalProps {
@@ -14,15 +14,17 @@ interface BookingModalProps {
 export default function BookingModal({ isOpen, onClose, selectedPack }: BookingModalProps) {
     const [formData, setFormData] = useState({
         name: "",
+        company: "",
         email: "",
         phone: "",
+        details: "",
         imageLink: "",
     });
 
     // Reset form when modal opens
     useEffect(() => {
         if (isOpen) {
-            setFormData({ name: "", email: "", phone: "", imageLink: "" });
+            setFormData({ name: "", company: "", email: "", phone: "", details: "", imageLink: "" });
         }
     }, [isOpen]);
 
@@ -35,8 +37,10 @@ export default function BookingModal({ isOpen, onClose, selectedPack }: BookingM
             `¡Hola! Quiero contratar el *${selectedPack}*\\n\\n` +
             `*Mis Datos:*\\n` +
             `👤 Nombre: ${formData.name}\\n` +
+            `🏢 Empresa: ${formData.company}\\n` +
             `📧 Email: ${formData.email}\\n` +
             `📱 Teléfono: ${formData.phone}\\n` +
+            `📝 Detalles: ${formData.details}\\n` +
             `🔗 Imágenes: ${imageLinkText}`
         );
 
@@ -118,6 +122,23 @@ export default function BookingModal({ isOpen, onClose, selectedPack }: BookingM
 
                                     <div className="space-y-1">
                                         <label className="text-xs font-sans uppercase tracking-wider text-gray-500 ml-1">
+                                            Empresa o Inmobiliaria
+                                        </label>
+                                        <div className="relative">
+                                            <Building2 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={16} />
+                                            <input
+                                                type="text"
+                                                name="company"
+                                                value={formData.company}
+                                                onChange={handleChange}
+                                                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 focus:border-accent focus:ring-0 outline-none text-sm transition-all rounded"
+                                                placeholder="Nombre de la empresa"
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <label className="text-xs font-sans uppercase tracking-wider text-gray-500 ml-1">
                                             Email
                                         </label>
                                         <div className="relative">
@@ -154,6 +175,26 @@ export default function BookingModal({ isOpen, onClose, selectedPack }: BookingM
 
                                     <div className="space-y-1">
                                         <label className="text-xs font-sans uppercase tracking-wider text-gray-500 ml-1">
+                                            Detalles del Proyecto
+                                        </label>
+                                        <div className="relative">
+                                            <FileText className="absolute left-3 top-3 text-gray-400" size={16} />
+                                            <textarea
+                                                name="details"
+                                                maxLength={300}
+                                                value={formData.details}
+                                                onChange={(e) => setFormData({ ...formData, details: e.target.value })}
+                                                className="w-full pl-10 pr-4 py-3 bg-gray-50 border border-gray-200 focus:border-accent focus:ring-0 outline-none text-sm transition-all rounded resize-none min-h-[80px]"
+                                                placeholder="Breve descripción (Máx. 300 caracteres)"
+                                            />
+                                        </div>
+                                        <div className="text-[10px] text-gray-400 text-right">
+                                            {formData.details.length}/300
+                                        </div>
+                                    </div>
+
+                                    <div className="space-y-1">
+                                        <label className="text-xs font-sans uppercase tracking-wider text-gray-500 ml-1">
                                             Enlace a Imágenes
                                         </label>
                                         <div className="relative">
@@ -179,6 +220,10 @@ export default function BookingModal({ isOpen, onClose, selectedPack }: BookingM
                                         <span>Enviar Solicitud</span>
                                         <Send size={14} className="group-hover:translate-x-1 transition-transform" />
                                     </button>
+
+                                    <p className="text-[10px] text-gray-400 text-center leading-tight pt-2">
+                                        No se aceptan imágenes adjuntas por este medio. Por favor, proporcione un enlace de descarga (Drive, Dropbox, etc.).
+                                    </p>
                                 </form>
                             </div>
                         </motion.div>
