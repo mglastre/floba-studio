@@ -13,13 +13,13 @@ const projects = [
         tags: ["Interiorismo", "Renderizado Fotorrealista"]
     },
     {
-        title: "Transformación de Cocina",
+        title: "Amoblamiento Moderno",
         before: "/portfolio/antes-2.jpg",
         after: "/portfolio/despues-2.jpg",
         tags: ["Arquitectura", "Diseño Moderno"]
     },
     {
-        title: "Rediseño de Espacios",
+        title: "Rediseño de Fachadas",
         before: "/portfolio/antes-3.jpg",
         after: "/portfolio/despues-3.jpg",
         tags: ["Estética", "Ambiente Cálido"]
@@ -37,7 +37,7 @@ const projects = [
         tags: ["Confort", "Texturas"]
     },
     {
-        title: "Skyline Suite",
+        title: "Transformación 360",
         before: "/portfolio/antes-6.jpg",
         after: "/portfolio/despues-6.jpg",
         tags: ["Lujo", "Vistas Panorámicas"]
