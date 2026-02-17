@@ -27,17 +27,6 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-
-            {/* Floating WhatsApp Button */}
-            <a
-                href="https://wa.me/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="fixed bottom-8 right-8 z-50 bg-[#25D366] text-white p-4 rounded-full shadow-lg hover:shadow-xl hover:scale-110 transition-all duration-300"
-                aria-label="Contactar por WhatsApp"
-            >
-                <MessageCircle size={32} strokeWidth={1.5} />
-            </a>
         </footer>
     );
 }
