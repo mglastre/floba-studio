@@ -24,7 +24,7 @@ export async function POST(request: Request) {
 
         // 1. Email to Admin
         const adminMailOptions = {
-            from: process.env.SMTP_USER, // Sender address
+            from: `"Floba Studio" <hola@flobastudio.com>`, // Sender address
             to: "hola@flobastudio.com", // Admin address
             subject: `Nueva Solicitud: ${selectedPack} - ${uniqueId}`,
             text: `
@@ -55,7 +55,7 @@ export async function POST(request: Request) {
 
         // 2. Auto-reply to User
         const userMailOptions = {
-            from: process.env.SMTP_USER,
+            from: `"Floba Studio" <hola@flobastudio.com>`,
             to: email,
             subject: `Confirmación de solicitud – ${uniqueId}`,
             text: `
@@ -90,13 +90,21 @@ Equipo Floba Studio</p>
         };
 
         // Send emails
-        await transporter.sendMail(adminMailOptions);
-        await transporter.sendMail(userMailOptions);
+        console.log("📨 Intentando enviar emails...");
+        const adminResult = await transporter.sendMail(adminMailOptions);
+        console.log("✅ Admin email enviado:", adminResult.messageId);
+
+        const userResult = await transporter.sendMail(userMailOptions);
+        console.log("✅ Auto-reply enviado:", userResult.messageId);
 
         return NextResponse.json({ success: true, message: "Emails sent successfully", id: uniqueId });
 
-    } catch (error) {
-        console.error("Error sending emails:", error);
-        return NextResponse.json({ success: false, message: "Error sending emails" }, { status: 500 });
+    } catch (error: any) {
+        console.error("❌ Error en el servidor al enviar emails:", error);
+        return NextResponse.json({
+            success: false,
+            message: error.message || "Error interno del servidor",
+            details: error.toString()
+        }, { status: 500 });
     }
 }

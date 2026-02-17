@@ -56,9 +56,12 @@ export default function BookingModal({ isOpen, onClose, selectedPack }: BookingM
             } else {
                 throw new Error(data.message || 'Error al enviar la solicitud.');
             }
-        } catch (error) {
+        } catch (error: any) {
             console.error("Error submitting form:", error);
-            setStatus({ type: 'error', message: 'Hubo un error. Por favor, intenta nuevamente.' });
+            setStatus({
+                type: 'error',
+                message: error.message || 'Hubo un error. Por favor, intenta nuevamente.'
+            });
         } finally {
             setLoading(false);
         }
