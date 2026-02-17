@@ -6,6 +6,15 @@ export async function POST(request: Request) {
         const body = await request.json();
         const { name, company, email, phone, details, imageLink, selectedPack } = body;
 
+        // Check for required environment variables
+        if (!process.env.SMTP_HOST || !process.env.SMTP_USER || !process.env.SMTP_PASS) {
+            console.error("❌ Error: Faltan las variables de entorno para SMTP (SMTP_HOST, SMTP_USER, SMTP_PASS)");
+            return NextResponse.json({
+                success: false,
+                message: "Configuración incompleta en el servidor. Por favor, asegúrese de agregar las Variables de Entorno (SMTP_HOST, USER, PASS) en el panel de Vercel/Hosting."
+            }, { status: 500 });
+        }
+
         // Generate a unique ID (PA + timestamp last 6 digits for brevity/uniqueness)
         const timestamp = Date.now().toString();
         const uniqueId = `PA${timestamp.slice(-6)}`;
