@@ -99,12 +99,8 @@ Equipo Floba Studio</p>
         };
 
         // Send emails
-        console.log("📨 Intentando enviar emails...");
-        const adminResult = await transporter.sendMail(adminMailOptions);
-        console.log("✅ Admin email enviado:", adminResult.messageId);
-
-        const userResult = await transporter.sendMail(userMailOptions);
-        console.log("✅ Auto-reply enviado:", userResult.messageId);
+        await transporter.sendMail(adminMailOptions);
+        await transporter.sendMail(userMailOptions);
 
         return NextResponse.json({ success: true, message: "Emails sent successfully", id: uniqueId });
 

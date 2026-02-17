@@ -21,7 +21,7 @@ const packs = [
     {
         name: "AI Virtual Revive",
         ideal: "Inmuebles usados o vacíos (Captaciones rápidas).",
-        content: "4 Renders de amoblamiento virtual sobre fotos reales. (1 exterior, 3 interior)",
+        content: "6 Renders de amoblamiento virtual sobre fotos reales.",
         delivery: "24 - 48 hs",
         format: "Alta Definición (Horizontal + Vertical).",
         customization: "Selección estándar de materiales y muebles.",
@@ -35,7 +35,7 @@ const packs = [
     {
         name: "Essential Portfolio",
         ideal: "Inmuebles nuevos/usados que buscan destacar.",
-        content: "5 Renders de amoblamiento virtual sobre fotos reales + 1 Video Render",
+        content: "10 Renders de amoblamiento virtual sobre fotos reales + 1 Video Render",
         delivery: "3 a 5 días hábiles.",
         format: "4K Ultra HD (Horizontal + Vertical).",
         customization: "Premium Custom: Iluminación y materiales a medida.",
@@ -49,7 +49,7 @@ const packs = [
     {
         name: "Hyper-Motion Experience",
         ideal: "Desarrollos Premium y Lanzamientos.",
-        content: "8 Renders 4K de amoblamiento virtual (3 exterior, 5 interior) + Video Reel 4K (30s)",
+        content: "15 Renders 4K de amoblamiento virtual + Video Reel 4K (30s)",
         delivery: "7 a 10 días hábiles.",
         format: "4K Ultra HD (Horizontal + Vertical).",
         customization: "Elite Custom: Diseño de autor y marketing emocional.",
@@ -63,7 +63,7 @@ const packs = [
     {
         name: "Ecosystem Experience",
         ideal: "Edificios, Barrios y Masterplans.",
-        content: "20 Renders + 2 Videos Reel + Video Drone 60s + Tour 360°.",
+        content: "30 Renders + 2 Videos Reel + Video Drone 60s + Tour 360°.",
         delivery: "15 a 20 días hábiles.",
         format: "Master Kit (Todos los formatos + 360°).",
         customization: "Trazabilidad Total: Identidad visual coherente en todo el proyecto.",
